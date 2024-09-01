@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Learning Chatbot</title>
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel = "stylesheet"/>
+
+</head>
+<body>
+    <div class="header-box" style="color: white; font-size:35px; font-family:'Courier New', Courier, monospace">
+        <h1>
+            Chinese Chatbot - 中文聊天机器人
+        </h1>
+    </div>
+    <table style="width:100%">
+        <tr>
+            <td style="width:50%; padding: 10px;">
+                <form action="/get_response" method="post" style="margin-left: 50px; width:100%;">
+                    <label for="lesson_number">Enter Lesson Number:</label>
+                    <input type="text" id="lesson_number" name="lesson_number">
+
+
+                    <input type="submit" value="Submit">
+                </form>
+            </td>
+            <td style="width:25%">
+                <!-- Empty cell (25% of the screen) -->
+            </td>
+            <td style="width:25%; padding: 10px; align-items: right;">
+                <div class="header-box" >
+                    <h2>Welcome to this AI Interface!</h2>
+                </div>
+                <div class="header-box"style="background-color:#9ad7bf;padding:10px; margin-top: 0px; border-radius:0px;">
+                    <p>我叫博克儿，我是这个机器人的创造者。我开始这个项目是为了给汉语学生提供好玩儿和有趣的学习体验。我希望你能使用这个机器人来提高你对生词和语法的理解，并提高您的会话技巧。如有任何问题，请联系@kbrennan24@students.hopkins.edu </p>
+                    <p>My name is Kiersten  Brennan and I am the creator of this robot. I started this project to provide a fun and interesting learning experience for Chinese language students. I hope you will use this robot to improve your understanding of new words and grammar, and improve your conversational skills. If you have any questions, please contact @kbrennan24@students.hopkins.edu</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

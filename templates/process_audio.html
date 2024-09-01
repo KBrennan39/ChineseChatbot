@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Audio to Text</title>
+    <script>
+    async function recordAndSend() {
+        // Check if the browser supports audio capture
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Ask for permission to use the microphone
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+
+            // Array to hold audio data chunks
+            const audioChunks = [];
+
+            // When data is available, add it to the chunks array
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
+            };
+
+            // Start recording
+            mediaRecorder.start();
+
+            // Record for 5 seconds then stop
+            setTimeout(() => {
+                mediaRecorder.stop();
+            }, 5000);
+
+            // When recording stops, send audio to backend
+            mediaRecorder.onstop = async () => {
+                const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                const formData = new FormData();
+                formData.append('audio', blob, 'input_audio.webm');
+
+                const response = await fetch('/get_response', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerText = `Transcription: ${result.transcription}`;
+            
+            };
+        } else {
+            console.error('Audio capture not supported');
+        }
+    }
+    </script>
+</head>
+<body>
+    <h1>Record Audio and Convert to Text</h1>
+    <button onclick="recordAndSend()">Record and Transcribe</button>
+    <div id="result"></div>
+</body>
+</html>

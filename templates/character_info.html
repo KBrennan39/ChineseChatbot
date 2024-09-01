@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Learning Chatbot</title>
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel = "stylesheet"/>
+    <style>
+        .white-box {
+            background-color: white; /* Set background color to white */
+            border: 1px solid #ccc; /* Light gray border for visibility */
+            border-radius: 10px; /* Rounded edges with a radius of 10px */
+            padding: 20px; /* Padding inside the box */
+            width: 50%; /* Optional: Set the width of the box */
+            margin-top: 20px;
+            margin-left: 50px;
+            text-align: center;
+        }
+
+        .styled-paragraph {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box" style="color: white; font-size:35px; font-family:'Courier New', Courier, monospace">
+        <h1>
+            Chinese Chatbot - 中文聊天机器人
+        </h1>
+    </div>
+    <h2 style="margin-top: 20px; margin-left: 50px;">{{ character }}</h2>
+    <audio controls style="margin-left: 50px; padding:10px">
+        <source src="/audio" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="white-box"> <!-- Container with white background and rounded edges -->
+        <p class="styled-paragraph"> <!-- Paragraph with specified margins -->
+            {{ description }}
+        </p>
+    </div>
+</body>
+</html>

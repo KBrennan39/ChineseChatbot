@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response</title>
+
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel = "stylesheet"/>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+
+        th, td{
+            padding: 10px; /* Adds padding inside each cell */
+            border: 5px solid #278c65; /* Gives cells a border with light gray color */
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box" style="color: white; font-size:35px; font-family:'Courier New', Courier, monospace">
+        <h1>
+            Chinese Chatbot - 中文聊天机器人
+        </h1>
+    </div>
+    {% if first_round == False %}
+        <h2 style="margin-top: 20px; margin-left: 50px;">{{ user_input }}</h2>
+        <h3 style="margin-top: 6px; margin-left: 50px; font-size: 14px;"><a href='/vocabulary_errors/{{ user_input }}'>Vocabulary Errors</a>  |  <a href='/grammar_errors/{{ user_input }}'>Grammar Errors</a></h3>
+    {% endif %}
+
+
+
+    <h2 style="margin-top: 20px; margin-left: 50px;">> {{ output }}</h2>
+    <h3 style="margin-top: 6px; margin-left: 50px; font-size: 14px;"><a href='/translate/{{ output }}'>Translate</a></h3>
+
+    <audio controls style="margin-left: 50px; padding:10px">
+        <source src="/audio" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <form action="/get_response" method="post" style="margin-top: 20px; margin-left: 50px;">
+        <label for="user_input">Enter your input:</label><br>
+        <input type="text" id="user_input" name="user_input"><br>
+        <input type="text" id="lesson_number" name="lesson_number" value="{{ lesson_number }}" style="display: none;">
+        <input type="submit" value="Submit">
+        
+    </form>
+    <div id="table-container">
+        {{ table | safe}}
+    </div>
+</body>
+</html>
